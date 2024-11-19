@@ -1,0 +1,8 @@
+pandas
+sqlalchemy
+fastapi
+uvicorn
+typing-extensions
+python-dotenv      # For managing environment variables
+psycopg2-binary    # PostgreSQL database driver
+databases          # For async database connection handling

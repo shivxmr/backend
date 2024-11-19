@@ -200,9 +200,13 @@ def insert_exemplar_data(file_path: str) -> None:
                     payment_date = None if pd.isna(payment_date) else payment_date
                     
                     # Handle potential null values for numeric fields
-                    invoice_amount = float(row.get('Invoice Amount').replace(',', '')) if pd.notnull(row.get('Invoice Amount')) else None
-                    net_amount = float(row.get('Net Amount').replace(',', '')) if pd.notnull(row.get('Net Amount')) else None
+                    # invoice_amount = float(row.get('Invoice Amount').replace(',', '')) if pd.notnull(row.get('Invoice Amount')) else None
+                    # net_amount = float(row.get('Net Amount').replace(',', '')) if pd.notnull(row.get('Net Amount')) else None
                     
+                    invoice_amount = float(row.get('Invoice Amount').replace(',', '')) if isinstance(row.get('Invoice Amount'), str) and pd.notnull(row.get('Invoice Amount')) else None
+                    net_amount = float(row.get('Net Amount').replace(',', '')) if isinstance(row.get('Net Amount'), str) and pd.notnull(row.get('Net Amount')) else None
+                    
+
                     exemplar_entry = ExemplarReport(
                         order_id=str(row.get('Order Id')) if pd.notnull(row.get('Order Id')) else None,
                         transaction_type=str(row.get('Transaction Type')) if pd.notnull(row.get('Transaction Type')) else None,
@@ -217,8 +221,8 @@ def insert_exemplar_data(file_path: str) -> None:
                     db.add(exemplar_entry)
                     successful_inserts += 1
                     
-                    # Commit in batches of 200 to prevent memory issues
-                    if successful_inserts % 200 == 0:
+                    # Commit in batches of 500 to prevent memory issues
+                    if successful_inserts % 500 == 0:
                         db.flush()
                         db.commit()
                         logger.info(f"Committed batch of {successful_inserts} records")
