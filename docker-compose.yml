@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - ./logs:/app/logs
+      - ./output:/app/output
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/etl_db
+    depends_on:
+      - db
+    networks:
+      - etl-network
+
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=etl_db
+    ports:
+      - "5432:5432"
+    networks:
+      - etl-network
+
+volumes:
+  postgres_data:
+
+networks:
+  etl-network:
+    driver: bridge
