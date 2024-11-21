@@ -274,8 +274,6 @@ async def upload_files(payment_report: UploadFile, mtr_report: UploadFile):
         payment_output_path = str(output_dir / "transformed_payment_report.csv")
         mtr_output_path = str(output_dir / "transformed_mtr_report.xlsx")
         exemplar_output_path = str(output_dir / "exemplar_report.xlsx")
-
-       
         
         try:
             processed_payment.to_csv(payment_output_path, index=False)

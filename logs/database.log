@@ -50,3 +50,6 @@
 2024-11-19 15:50:39,981 - database - INFO - Committed batch of 8000 records
 2024-11-19 15:50:40,040 - database - INFO - Successfully inserted 8200 records into database
 2024-11-19 15:50:40,041 - main - INFO - File processing completed successfully
+2024-11-21 13:33:12,089 - database - INFO - Database engine created successfully
+2024-11-21 17:29:18,538 - database - INFO - Database engine created successfully
+2024-11-21 17:29:19,889 - database - INFO - Database engine created successfully

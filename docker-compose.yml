@@ -17,7 +17,7 @@ services:
       - etl-network
 
   db:
-    image: postgres:13
+    image: postgres:15
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
